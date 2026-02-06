@@ -11,16 +11,15 @@
 
   <style>
     :root {
-      --md-primary: #c62828;
-      --md-primary-dark: #b71c1c;
-      --md-accent: #ef5350;
-      --md-surface: #0d0d0d;
-      --md-surface-high: #1a1a1a;
-      --md-surface-elevated: #222222;
-      --md-on-surface: #ffffff;
-      --md-on-surface-light: #e0e0e0;
-      --md-outline: #444444;
-      --md-shadow-strong: rgba(0,0,0,0.70);
+      --bg-main: #0a0a0a;
+      --bg-card: #111111;
+      --text-main: #f0f0f0;
+      --text-light: #aaaaaa;
+      --border-gray: #333333;
+      --red-accent: #e63946;
+      --blue-accent: #457b9d;
+      --yellow-warning: #f4d03f;
+      --yellow-dark: #d4a017;
     }
 
     * {
@@ -31,70 +30,78 @@
 
     body {
       font-family: 'Roboto Flex', system-ui, -apple-system, sans-serif;
-      background: var(--md-surface);
-      color: var(--md-on-surface);
+      background: var(--bg-main);
+      color: var(--text-main);
       min-height: 100vh;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* Warning Banner */
+    /* === WARNING BANNER - GitHub style with animation === */
     .warning-banner {
-      background: linear-gradient(90deg, #7f0000, #a50000, #7f0000);
-      color: #ffcccc;
+      background: #1f1a00;
+      color: #ffeb3b;
       text-align: center;
-      padding: 1.1rem 1.5rem;
+      padding: 1.2rem 1.5rem;
       font-weight: 500;
       font-size: 1.05rem;
-      border-bottom: 2px solid #ef5350;
-      animation: pulse-bg 8s infinite ease-in-out;
-      position: relative;
-      z-index: 10;
-    }
-
-    @keyframes pulse-bg {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    header.top {
-      background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 70%, #c62828 100%);
-      color: white;
-      text-align: center;
-      padding: 5.5rem 1.5rem 4.5rem;
+      border-bottom: 2px solid var(--yellow-warning);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 30px var(--md-shadow-strong);
+      box-shadow: 0 4px 12px rgba(244, 208, 63, 0.15);
     }
 
-    header.top::before {
-      content: "";
+    .warning-banner::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(90deg, transparent, var(--red-accent), var(--blue-accent), var(--red-accent), transparent);
+      animation: border-flow 5s linear infinite;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .warning-banner::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 15% 25%, rgba(255,255,255,0.18) 0%, transparent 65%);
-      animation: shine 12s infinite linear;
+      background: linear-gradient(90deg, transparent, rgba(244,208,63,0.12), transparent);
+      animation: pulse-glow 4s ease-in-out infinite;
       pointer-events: none;
     }
 
-    @keyframes shine {
-      0% { transform: translateX(-100%); }
-      50% { transform: translateX(100%); }
+    @keyframes border-flow {
+      0%   { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
 
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 0.85; }
+    }
+
+    header.top {
+      background: #0f0f0f;
+      color: white;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      border-bottom: 1px solid var(--border-gray);
+    }
+
     h1 {
-      font-size: clamp(3rem, 10vw, 4.8rem);
+      font-size: clamp(3.2rem, 10vw, 5rem);
       font-weight: 900;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       margin-bottom: 0.6rem;
-      text-shadow: 0 6px 20px rgba(0,0,0,0.7);
+      color: white;
     }
 
     header p {
-      font-size: clamp(1.15rem, 4.5vw, 1.4rem);
-      opacity: 0.95;
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
+      color: var(--text-light);
       max-width: 580px;
-      margin: 0 auto 2.6rem;
+      margin: 0 auto 2.8rem;
     }
 
     .btn {
@@ -103,66 +110,53 @@
       gap: 0.9rem;
       font-weight: 700;
       font-size: 1.18rem;
-      padding: 1.2rem 2.6rem;
+      padding: 1.15rem 2.5rem;
       border-radius: 999px;
-      text-decoration: none;
       cursor: pointer;
-      transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.3s ease;
       border: none;
       position: relative;
       overflow: hidden;
     }
 
-    .btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s;
-    }
-
-    .btn:hover::after {
-      transform: translateX(100%);
-    }
-
     .btn-primary {
       background: white;
-      color: #b71c1c;
-      box-shadow: 0 6px 20px rgba(183,28,28,0.4);
+      color: #000;
+      box-shadow: 0 4px 14px rgba(255,255,255,0.08);
     }
 
     .btn-primary:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 16px 40px rgba(183,28,28,0.55);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(230,57,70,0.35);
+      background: #fff5f5;
+      color: var(--red-accent);
     }
 
     .btn-start-download {
-      background: #d32f2f;
+      background: var(--red-accent);
       color: white;
-      box-shadow: 0 6px 20px rgba(211,47,47,0.5);
+      box-shadow: 0 4px 16px rgba(230,57,70,0.4);
     }
 
     .btn-start-download:hover {
-      transform: translateY(-5px) scale(1.03);
-      background: #e53935;
-      box-shadow: 0 14px 36px rgba(211,47,47,0.6);
+      background: #f04858;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(230,57,70,0.5);
     }
 
     .btn-cancel {
       background: transparent;
-      border: 2px solid #666;
-      color: white;
-      padding: 1.05rem 2rem;
+      border: 2px solid #555;
+      color: var(--text-main);
     }
 
     .btn-cancel:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: #aaa;
+      border-color: #888;
+      background: rgba(255,255,255,0.06);
     }
 
     .material-symbols-outlined {
-      font-size: 1.5rem;
+      font-size: 1.55rem;
       font-variation-settings: 'FILL' 1, 'wght' 600;
     }
 
@@ -173,20 +167,19 @@
 
     #downloadConfirm {
       display: none;
-      margin: 2.8rem auto 1.5rem;
-      padding: 2.4rem 1.8rem;
-      background: var(--md-surface-elevated);
-      border-radius: 28px;
+      margin: 2.5rem auto;
+      padding: 2.3rem 1.8rem;
+      background: var(--bg-card);
+      border-radius: 24px;
       max-width: 500px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.65);
-      border: 1px solid #444;
+      border: 1px solid var(--border-gray);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
     #downloadConfirm h3 {
-      color: var(--md-accent);
+      color: var(--red-accent);
       margin-bottom: 1.4rem;
-      font-size: 1.65rem;
-      font-weight: 700;
+      font-size: 1.6rem;
     }
 
     section.features {
@@ -198,10 +191,9 @@
     h2 {
       font-size: 2.6rem;
       font-weight: 800;
-      color: var(--md-accent);
+      color: white;
       text-align: center;
       margin: 1rem 0 3rem;
-      text-shadow: 0 3px 12px rgba(239,83,80,0.3);
     }
 
     .feature-grid {
@@ -211,14 +203,13 @@
     }
 
     .feature-card {
-      background: var(--md-surface-high);
-      padding: 2.1rem 1.7rem;
-      border-radius: 24px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-      border: 1px solid #333;
+      background: var(--bg-card);
+      padding: 2rem 1.7rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-gray);
+      transition: all 0.4s ease;
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(35px);
     }
 
     .feature-card.visible {
@@ -227,28 +218,28 @@
     }
 
     .feature-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 16px 48px rgba(239,83,80,0.25);
-      border-color: var(--md-accent);
+      border-color: var(--red-accent);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(230,57,70,0.18);
     }
 
     .feature-card .icon {
       font-size: 3.4rem;
-      color: var(--md-accent);
-      margin-bottom: 1.3rem;
+      color: var(--red-accent);
+      margin-bottom: 1.2rem;
       display: block;
     }
 
     .feature-card h3 {
-      font-size: 1.45rem;
+      font-size: 1.42rem;
       font-weight: 800;
       margin-bottom: 0.9rem;
       color: white;
     }
 
     .feature-card p {
-      color: var(--md-on-surface-light);
-      font-size: 1.05rem;
+      color: var(--text-light);
+      font-size: 1.04rem;
     }
 
     footer {
@@ -256,31 +247,29 @@
       padding: 4rem 1rem 5rem;
       color: #666;
       font-size: 0.98rem;
-      border-top: 1px solid #333;
+      border-top: 1px solid var(--border-gray);
     }
 
     footer b {
-      color: var(--md-accent);
+      color: var(--red-accent);
     }
 
     @media (max-width: 600px) {
-      header.top { padding: 4.5rem 1.2rem 3.8rem; }
-      h1 { font-size: 3.4rem; }
-      .btn { padding: 1.05rem 2.2rem; font-size: 1.08rem; }
-      .feature-grid { gap: 1.4rem; }
-      .feature-card { padding: 1.9rem 1.5rem; }
+      header.top { padding: 4.5rem 1.2rem 3.5rem; }
+      h1 { font-size: 3.5rem; }
+      .btn { padding: 1rem 2.2rem; font-size: 1.08rem; }
     }
   </style>
 </head>
 <body>
 
 <div class="warning-banner">
-  Important Notice: This application has been tested primarily on Android 10 and above. There is no guarantee of full compatibility with all devices or older Android versions. We are actively working on broader compatibility improvements — thank you for your patience and understanding.
+  Important Notice: This application has been primarily tested on Android 10 and newer versions. There is no guarantee of full compatibility with all devices or older Android versions. We are actively working to improve compatibility — thank you for your patience and understanding.
 </div>
 
 <header class="top">
-  <h1>MusicX <span style="opacity:0.92">🎵</span></h1>
-  <p>Next-generation offline music experience • Material You • Dark & intense</p>
+  <h1>MusicX <span style="opacity:0.9">🎵</span></h1>
+  <p>Next-generation offline music player • Pure dark mode • Powerful & clean</p>
 </header>
 
 <div class="download-section">
@@ -294,7 +283,7 @@
     <p style="margin-bottom: 1.8rem;">
       Version <b>1.0.1</b><br>
       File size <b>57.95 MB</b><br>
-      Direct download • No registration • GitHub Releases
+      Direct • No login • GitHub Releases
     </p>
 
     <a href="https://github.com/imetdx-byte/MusicX/releases/download/v1.0.1/base.apk"
@@ -315,50 +304,50 @@
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">palette</span>
-      <h3>Material 3 Design</h3>
-      <p>Modern UI with dynamic theming, deep dark mode and fluid animations</p>
+      <h3>Modern Dark UI</h3>
+      <p>Clean black & white design with red highlights and smooth transitions</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">speed</span>
-      <h3>Blazing Fast & Lightweight</h3>
-      <p>Instant startup, minimal resource usage, 100% offline</p>
+      <h3>Ultra Lightweight</h3>
+      <p>Fast loading, minimal RAM usage, 100% offline playback</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">play_circle</span>
-      <h3>Intelligent Playback</h3>
-      <p>Gapless playback • queue • seek • repeat • shuffle • sleep timer</p>
+      <h3>Smart Playback Engine</h3>
+      <p>Gapless • queue • seek • repeat • shuffle • sleep timer</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">music_note</span>
-      <h3>Universal Format Support</h3>
+      <h3>Wide Format Support</h3>
       <p>MP3 • FLAC • WAV • OGG • AAC • Opus • M4A • APE + more</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">equalizer</span>
-      <h3>Advanced Equalizer</h3>
-      <p>Powerful 5/10-band EQ, bass boost, virtualizer, custom presets</p>
+      <h3>Powerful Equalizer</h3>
+      <p>5/10-band EQ, bass boost, virtualizer, custom presets</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">folder_open</span>
-      <h3>Smart Music Library</h3>
-      <p>Auto folder scanning, artist/album grouping, search, favorites</p>
+      <h3>Smart Library</h3>
+      <p>Auto scanning, artist/album view, search, favorites</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">playlist_play</span>
-      <h3>Powerful Playlists</h3>
-      <p>Create, edit, import, export playlists • drag & drop sorting</p>
+      <h3>Advanced Playlists</h3>
+      <p>Create, edit, import/export, drag & drop sorting</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">timer</span>
-      <h3>Sleep Timer & Fade</h3>
-      <p>Smart sleep timer with smooth fade-out for comfortable listening</p>
+      <h3>Sleep Timer + Fade</h3>
+      <p>Smart timer with smooth audio fade-out</p>
     </div>
 
   </div>
@@ -369,7 +358,7 @@
 </footer>
 
 <script>
-// Two-step download
+// Download confirmation
 const downloadBtn = document.getElementById('downloadBtn');
 const confirmBox = document.getElementById('downloadConfirm');
 const cancelBtn = document.getElementById('cancelBtn');
@@ -385,7 +374,7 @@ cancelBtn.addEventListener('click', () => {
   downloadBtn.style.display = 'inline-flex';
 });
 
-// Scroll animation for cards
+// Scroll reveal animation
 const cards = document.querySelectorAll('.feature-card');
 
 const observer = new IntersectionObserver((entries) => {
@@ -396,12 +385,12 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, {
-  threshold: 0.15,
-  rootMargin: "0px 0px -10% 0px"
+  threshold: 0.18,
+  rootMargin: "0px 0px -12% 0px"
 });
 
 cards.forEach(card => observer.observe(card));
 </script>
 
 </body>
-      </html>
+  </html>
