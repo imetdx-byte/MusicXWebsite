@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MusicX â€¢ Powerful Music Player</title>
+  <title>MusicX • Powerful Music Player</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +11,9 @@
 
   <style>
     :root {
-      --md-primary: #c62828;               /* vivid red */
+      --md-primary: #c62828;
       --md-primary-container: #ff8a80;
       --md-on-primary: #ffffff;
-      --md-on-primary-container: #410002;
-      --md-secondary: #d32f2f;
       --md-surface: #121212;
       --md-surface-bright: #1e1e1e;
       --md-surface-container: #1c1c1e;
@@ -23,8 +21,6 @@
       --md-on-surface: #ffffff;
       --md-on-surface-variant: #e0e0e0;
       --md-outline: #757575;
-      --md-inverse-surface: #ffffff;
-      --md-shadow: #000000;
       --md-elevation-1: 0 1px 4px rgba(0,0,0,0.28);
       --md-elevation-2: 0 4px 12px rgba(0,0,0,0.40);
       --md-elevation-3: 0 8px 24px rgba(0,0,0,0.50);
@@ -41,14 +37,14 @@
       background: var(--md-surface);
       color: var(--md-on-surface);
       min-height: 100vh;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     header.top {
       background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%);
       color: white;
       text-align: center;
-      padding: 5.5rem 1.5rem 4.5rem;
+      padding: 5rem 1.5rem 4rem;
       position: relative;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(0,0,0,0.6);
@@ -63,18 +59,18 @@
     }
 
     h1 {
-      font-size: 3.8rem;
+      font-size: clamp(2.8rem, 9vw, 4.2rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.7rem;
       text-shadow: 0 4px 14px rgba(0,0,0,0.55);
     }
 
     header p {
-      font-size: 1.3rem;
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
       opacity: 0.94;
-      max-width: 520px;
-      margin: 0 auto 2.4rem;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
     }
 
     .btn {
@@ -118,7 +114,7 @@
     .btn-cancel {
       background: transparent;
       border: 1px solid #757575;
-      color: #ffffff;
+      color: white;
       padding: 1rem 1.9rem;
     }
 
@@ -131,9 +127,37 @@
       font-variation-settings: 'FILL' 1, 'wght' 500;
     }
 
+    .download-section {
+      text-align: center;
+      padding: 2rem 1.5rem 3.5rem;
+    }
+
+    #downloadConfirm {
+      display: none;
+      margin: 2.5rem auto 1rem;
+      padding: 2rem 1.6rem;
+      background: var(--md-surface-container-high);
+      border-radius: 24px;
+      max-width: 480px;
+      box-shadow: var(--md-elevation-3);
+      border: 1px solid #444;
+    }
+
+    #downloadConfirm h3 {
+      color: #ef5350;
+      margin-bottom: 1.3rem;
+      font-size: 1.55rem;
+    }
+
+    #downloadConfirm p {
+      margin-bottom: 1.8rem;
+      color: #bbbbbb;
+      font-size: 1.05rem;
+    }
+
     section.features {
-      padding: 4.5rem 1.5rem 5rem;
-      max-width: 960px;
+      padding: 2rem 1.5rem 5rem;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -142,22 +166,22 @@
       font-weight: 700;
       color: #ef5350;
       text-align: center;
-      margin-bottom: 3rem;
+      margin: 1.5rem 0 2.8rem;
     }
 
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem 1.6rem;
     }
 
     .feature-card {
       background: var(--md-surface-container-high);
-      padding: 2rem 1.6rem;
+      padding: 1.9rem 1.5rem;
       border-radius: 20px;
       box-shadow: var(--md-elevation-1);
       transition: all 0.26s ease;
-      border: 1px solid #333;
+      border: 1px solid #383838;
     }
 
     .feature-card:hover {
@@ -167,57 +191,29 @@
     }
 
     .feature-card .icon {
-      font-size: 3.2rem;
+      font-size: 3.1rem;
       color: #ef5350;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.1rem;
       display: block;
     }
 
     .feature-card h3 {
-      font-size: 1.45rem;
+      font-size: 1.38rem;
       font-weight: 700;
-      margin-bottom: 0.9rem;
+      margin-bottom: 0.8rem;
       color: white;
     }
 
     .feature-card p {
       color: var(--md-on-surface-variant);
-      font-size: 1.05rem;
-    }
-
-    .download-section {
-      text-align: center;
-      padding: 2rem 1.5rem 4rem;
-    }
-
-    #downloadConfirm {
-      display: none;
-      margin: 2.5rem auto 0;
-      padding: 2.2rem;
-      background: var(--md-surface-container-high);
-      border-radius: 24px;
-      max-width: 460px;
-      box-shadow: var(--md-elevation-3);
-      border: 1px solid #444;
-    }
-
-    #downloadConfirm h3 {
-      color: #ef5350;
-      margin-bottom: 1.4rem;
-      font-size: 1.5rem;
-    }
-
-    #downloadConfirm p {
-      margin-bottom: 1.6rem;
-      color: #bbbbbb;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
     }
 
     footer {
       text-align: center;
-      padding: 4rem 1rem 3.5rem;
+      padding: 3.5rem 1rem 4rem;
       color: #757575;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       border-top: 1px solid #333;
     }
 
@@ -226,17 +222,19 @@
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 3rem; }
-      header.top { padding: 4.5rem 1.2rem 3.8rem; }
-      .btn { padding: 1rem 2rem; font-size: 1.05rem; }
+      header.top { padding: 4.2rem 1.2rem 3.5rem; }
+      h1 { font-size: 3.1rem; }
+      .btn { padding: 1rem 2.1rem; font-size: 1.05rem; }
+      .feature-grid { gap: 1.2rem; }
+      .feature-card { padding: 1.7rem 1.4rem; }
     }
   </style>
 </head>
 <body>
 
 <header class="top">
-  <h1>MusicX <span style="opacity:0.92">ðŸŽµ</span></h1>
-  <p>Next-level offline music player â€¢ Material You â€¢ Dark & powerful</p>
+  <h1>MusicX <span style="opacity:0.92">🎵</span></h1>
+  <p>Next-level offline music player • Material You • Dark & powerful</p>
 </header>
 
 <div class="download-section">
@@ -249,8 +247,8 @@
     <h3>Download MusicX?</h3>
     <p>
       Version <b>1.0.1</b><br>
-      Size â‰ˆ 40â€“60 MB<br>
-      Direct â€¢ No login â€¢ From GitHub Releases
+      Size ≈ 12–25 MB<br>
+      Direct • No login • From GitHub Releases
     </p>
 
     <a href="https://github.com/imetdx-byte/MusicX/releases/download/v1.0.1/base.apk"
@@ -271,33 +269,45 @@
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">palette</span>
-      <h3>Material 3 Redesign</h3>
-      <p>Dynamic colors, deep black theme, smooth motion, modern components</p>
+      <h3>Material 3 Design</h3>
+      <p>Modern look with dynamic colors, deep dark theme and smooth animations</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">speed</span>
-      <h3>Smoith like Butter</h3>
-      <p>Small footprint, zero bloat, full offline experience</p>
+      <h3>Ultra Lightweight</h3>
+      <p>Small size, zero bloat, fast startup, full offline experience</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">play_circle</span>
       <h3>Smart Playback</h3>
-      <p>Gapless, queue, seek, repeat, shuffle, sleep timer</p>
+      <p>Gapless playback, queue management, seek, repeat, shuffle, sleep timer</p>
     </div>
 
     <div class="feature-card">
       <span class="material-symbols-outlined icon">music_note</span>
       <h3>Format Freedom</h3>
-      <p>MP3 â€¢ FLAC â€¢ WAV â€¢ OGG â€¢ AAC â€¢ Opus â€¢ M4A and more</p>
+      <p>MP3 • FLAC • WAV • OGG • AAC • Opus • M4A and many more</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="material-symbols-outlined icon">equalizer</span>
+      <h3>Powerful Equalizer</h3>
+      <p>5-band equalizer, bass boost, virtualizer, presets and custom settings</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="material-symbols-outlined icon">folder_open</span>
+      <h3>Smart Library</h3>
+      <p>Auto scans folders, artist/album grouping, search, favorites & playlists</p>
     </div>
 
   </div>
 </section>
 
 <footer>
-  Made with passion by <b>TAQI</b> â€¢ 2025â€“2026
+  Made with passion by <b>TAQI</b> • 2025–2026
 </footer>
 
 <script>
@@ -308,7 +318,7 @@
   downloadBtn.addEventListener('click', () => {
     confirmBox.style.display = 'block';
     downloadBtn.style.display = 'none';
-    window.scrollTo({ top: confirmBox.offsetTop - 80, behavior: 'smooth' });
+    window.scrollTo({ top: confirmBox.offsetTop - 100, behavior: 'smooth' });
   });
 
   cancelBtn.addEventListener('click', () => {
@@ -318,4 +328,4 @@
 </script>
 
 </body>
-</html>
+  </html>
