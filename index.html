@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300..700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 
-  <!-- Lottie player -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <!-- DotLottie web component -->
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js" type="module"></script>
 
   <style>
     :root {
@@ -40,31 +40,31 @@
       line-height: 1.6;
     }
 
-    /* Loading animation overlay */
+    /* Loading screen */
     #loading-screen {
       position: fixed;
       inset: 0;
       background: var(--bg);
+      z-index: 99999;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease 2s;
-      pointer-events: none;
+      transition: opacity 0.8s ease;
     }
 
-    #loading-screen.fade-out {
+    #loading-screen.hidden {
       opacity: 0;
+      pointer-events: none;
     }
 
     .loading-lottie {
       width: 320px;
       height: 320px;
       max-width: 80vw;
-      max-height: 80vh;
+      max-height: 60vh;
     }
 
-    /* Caution banner - expandable */
+    /* Caution banner – expandable */
     .caution-banner {
       background: #1e293b;
       border-bottom: 1px solid var(--border);
@@ -280,21 +280,20 @@
       header.top { padding: 4.5rem 1.2rem 3.5rem; }
       h1 { font-size: 3.4rem; }
       .btn { padding: 1rem 2.2rem; font-size: 1.08rem; }
+      .loading-lottie { width: 240px; height: 240px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Loading animation -->
+<!-- Loading screen with dotlottie-wc -->
 <div id="loading-screen">
-  <lottie-player
+  <dotlottie-wc
     class="loading-lottie"
-    src="https://lottie.host/b223933c-72a1-4551-b66b-5f9e69a12753/MTRkRg0pd2.lottie"
-    background="transparent"
-    speed="1.1"
-    loop
+    src="https://lottie.host/bbdcd334-4e5d-4fee-ac9b-4c3895743e84/0YLgXSoe8Q.lottie"
     autoplay
-  ></lottie-player>
+    loop
+  ></dotlottie-wc>
 </div>
 
 <!-- Caution banner – expandable -->
@@ -396,14 +395,14 @@
 </footer>
 
 <script>
-// Loading screen fade out
+// Loading fade out
 window.addEventListener('load', () => {
   setTimeout(() => {
-    document.getElementById('loading-screen').classList.add('fade-out');
+    document.getElementById('loading-screen').classList.add('hidden');
     setTimeout(() => {
       document.getElementById('loading-screen').style.display = 'none';
-    }, 700);
-  }, 2500);
+    }, 800);
+  }, 2800); // \~2.8 seconds
 });
 
 // Expand / collapse caution
@@ -451,4 +450,4 @@ cards.forEach(card => observer.observe(card));
 </script>
 
 </body>
-    </html>
+</html>
